@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: zoispag/action-assign-milestone@v1
+      - uses: ibakshay/action-assign-milestone@v1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           milestone: 'roadmap'
