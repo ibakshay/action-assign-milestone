@@ -10,7 +10,7 @@ This action will assign a milestone to a new issue.
 | `milestone`  | Name of milestone to assign | Yes          |
 
 ## Example usage
-
+asd
 ```yml
 name: 'Auto Milestone Assign'
 
