@@ -1,5 +1,5 @@
 import {
-  assignMilestoneOnPullRequest,
+  assignMilestoneOnNewIssues,
   findMilestoneByName,
 } from './milestone-actions'
 import { getInput, info, setFailed } from '@actions/core'
@@ -11,11 +11,11 @@ async function run(): Promise<void> {
     const searchName = getInput('milestone', { required: true })
 
     const { title, id } = await findMilestoneByName(token, searchName)
-    assignMilestoneOnPullRequest(token, id)
+    assignMilestoneOnNewIssues(token, id)
 
     info(
       /* eslint-disable-next-line i18n-text/no-en */
-      `Milestone ${title} has been assigned to PR #${context.payload.pull_request?.number}`,
+      `Milestone ${title} has been assigned to the issue #${context.payload.issue?.number} :white_check_mark:`,
     )
   } catch ({ message }) {
     setFailed(message as string)

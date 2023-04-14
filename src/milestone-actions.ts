@@ -47,23 +47,26 @@ const findMilestoneByName = async (
   }
 }
 
-const assignMilestoneOnPullRequest = async (
+const assignMilestoneOnNewIssues = async (
   token: string,
   milestoneId: number,
 ): Promise<void> => {
-  if (context.payload.pull_request === undefined) {
+  if (context.payload.issue === undefined) {
     throw new Error(
-      'Cannot get pull_request payload. Ensure a pull_request event has been triggered',
+      'Cannot get issue payload. Ensure an issue event has been triggered',
     )
   }
 
   const octokit = getOctokit(token)
+  //  const octokit = getOctokit(token, {
+  //     baseUrl: context.apiUrl,
+  //   })
   await octokit.rest.issues.update({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    issue_number: context.payload.pull_request.number,
+    issue_number: context.payload.issue.number,
     milestone: milestoneId,
   })
 }
 
-export { findMilestoneByName, assignMilestoneOnPullRequest }
+export { findMilestoneByName, assignMilestoneOnNewIssues }
